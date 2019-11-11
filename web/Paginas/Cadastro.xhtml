@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Cadastro de Pessoas</title>
+    </h:head>
+    <h:body>
+        <h1>Cadastro de Pessoas</h1>
+        <br></br>
+        <br></br>
+        <br></br>
+        <h:form>
+            <h:panelGrid columns="2">
+                Fabricante
+                <h:inputText id="inpFabricante" value="#{bgrCadastro.fabricante}"></h:inputText>
+                Modelo
+                <h:inputText id="inpModelo" value="#{bgrCadastro.modelo}"></h:inputText>
+                Ano
+                <h:inputText id="inpAno" value="#{bgrCadastro.ano}"></h:inputText>
+                Preço
+                <h:inputText id="inpPreco" value="#{bgrCadastro.preco}"></h:inputText>
+                <h:inputHidden></h:inputHidden>
+                <h:commandButton id="btnCadastrar"
+                                 value="Cadastrar"
+                                 action="#{bgrCadastro.cadastrarCarro()}"
+                                 ></h:commandButton>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+
+
