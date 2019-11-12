@@ -37,7 +37,8 @@ public class bgrCadastro {
         carro.setFabricante(fabricante);
         carro.setModelo(modelo);
         carro.setAno(ano);
-        carro.setValor(preco);
+        carro.setValor(preco);        
+        controle.CadastrarCarro(carro);
         this.mensagem = controle.mensagem;
         return "/Paginas/RespostaCadastro.xhtml";
     }
@@ -72,6 +73,14 @@ public class bgrCadastro {
 
     public void setPreco(BigDecimal preco) {
         this.preco = preco;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
     }
     
     

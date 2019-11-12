@@ -20,10 +20,7 @@ public class Validacao {
             this.mensagem += "Fabricante com menos de 3 caracteres \n";
         
         if (carro.getModelo().length() < 3) 
-            this.mensagem += "Modelo com menos de 3 caracteres \n";
-        
-        if (carro.getAno().length() < 3);
-            this.mensagem += "Ano não pode ter apenas 3 números \n";
+            this.mensagem += "Modelo com menos de 3 caracteres \n";       
         
         if (carro.getAno().length() > 4)
             this.mensagem = "Ano não pode ser maior que 4 caracteres \n";
