@@ -6,6 +6,6 @@
     <property name="hibernate.connection.url">jdbc:sqlserver://localhost\FELIPE-NOTEBOOK\SQLEXPRESS:1433;databaseName=ALPOO</property>
     <property name="hibernate.connection.username">sa</property>
     <property name="hibernate.connection.password">saadmin</property>
-    <mapping class="Modelo.Carros" file="" jar="" package="Modelo" resource=""/>
+    <mapping class="Modelo.Carros"/>
   </session-factory>
 </hibernate-configuration>

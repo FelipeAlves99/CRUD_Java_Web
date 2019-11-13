@@ -34,6 +34,7 @@ public class bgrCadastro {
     public String cadastrarCarro(){
         Controle controle = new Controle();
         Carros carro = new Carros();
+        carro.setId(0);
         carro.setFabricante(fabricante);
         carro.setModelo(modelo);
         carro.setAno(ano);
