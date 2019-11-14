@@ -1,3 +1,4 @@
+
 # Making a simple CRUD with JavaWeb (Unip EXAM)
 
 In this tutorial, you will find a step-by-step on what you should do to make a simple **CRUD with JavaWeb**. Follow each step and in the end you will probably be ready to Unip's ALPOO Test.
@@ -178,14 +179,20 @@ Let's make the **Validacao** class.
 1. Create a new java class for it.
 2. Put this code inside. 
 
+ public String mensagem;
+ public int id;
+    public BigDecimal valor;
 
-public String mensagem;
-    public int id;
-
-    public void ValidaCarro(Carros carro) {
+    public void ValidaCarro(List<String> dadosCarro) {
         this.mensagem = "";
-        if (carro.getFabricante().length() < 3) 
-            this.mensagem += "Fabricante com menos de 3 caracteres \n";         
+        if (dadosCarro.get(0).length() < 3) 
+            this.mensagem += "Fabricante com menos de 3 caracteres \n";
+        
+        if (dadosCarro.get(1).length() < 3) 
+            this.mensagem += "Modelo com menos de 3 caracteres \n";       
+        
+        if (dadosCarro.get(2).length() > 4)
+            this.mensagem += "Ano não pode ser maior que 4 caracteres \n";        
     }
     
     public void ValidarId(String id){
@@ -196,6 +203,16 @@ public String mensagem;
             this.mensagem = "Id Inválido";
         }
     }
+    
+    public void ValidarValor(String valor){
+        this.mensagem = "";
+        try {
+            BigDecimal bigDecimal = new BigDecimal(valor);
+            this.valor = bigDecimal;
+        } catch (Exception e) {
+            this.mensagem = "Valor inválido";
+        }
+    }
 
 Put as many validations as you pleased
 
@@ -203,20 +220,34 @@ Let's make the **Controle** class
 1. Create a new java class
 2. Put this code:
 
-public String mensagem;
+`public String mensagem;`    
     
-    public void CadastrarCarro(Carros carro){
-        this.mensagem = "";
-        Validacao validacao = new Validacao();
-        validacao.ValidaCarro(carro);
-        if(validacao.mensagem.equals("")){
-            CarroDAO carroDAO = new CarroDAO();
-            carroDAO.CadastrarCarro(carro);
-            this.mensagem = carroDAO.mensagem;
+	    public void CadastrarCarro(List<String> dadosCarro){       
+	        this.mensagem = "";
+	        
+	        Carros carro = new Carros();
+	        Validacao validacao = new Validacao();
+	        
+	        validacao.ValidaCarro(dadosCarro);
+	        validacao.ValidarValor(dadosCarro.get(3));
+	        
+	        if(validacao.mensagem.equals("")){
+	            
+	            carro.setId(0);
+	            carro.setFabricante(dadosCarro.get(0));
+	            carro.setModelo(dadosCarro.get(1));
+	            carro.setAno(dadosCarro.get(2));
+	            carro.setValor(validacao.valor);
+	            
+	            CarroDAO carroDAO = new CarroDAO();
+	            carroDAO.CadastrarCarro(carro);
+	            this.mensagem = carroDAO.mensagem;
+	        }
+	        else
+	            this.mensagem = validacao.mensagem;
         }
-        else
-            this.mensagem = validacao.mensagem;
-    }
+    
+    
 As you can see, it is quite simple. First you validate your data and call the DAO method. 
 Just like the DAO part, Here you will need to create a method for each CRUD letter. We already have the C, so sit down, learn how to code and make the RUD methods. It's literally the same code. 
 
@@ -239,22 +270,21 @@ public class bgrCadastro {
     private String fabricante;
     private String modelo;
     private String ano;
-    private BigDecimal preco;
+    private String preco;
     private String mensagem;
     
-    public bgrCadastro() {
-        
-    }
+    public bgrCadastro() { }
     
     public String cadastrarCarro(){
         Controle controle = new Controle();
-        Carros carro = new Carros();
-        carro.setId(0);
-        carro.setFabricante(fabricante);
-        carro.setModelo(modelo);
-        carro.setAno(ano);
-        carro.setValor(preco);        
-        controle.CadastrarCarro(carro);
+        
+        List<String> dadosCarro = new ArrayList();
+        dadosCarro.add(fabricante);
+        dadosCarro.add(modelo);
+        dadosCarro.add(ano);   
+        dadosCarro.add(preco);
+                
+        controle.CadastrarCarro(dadosCarro);
         this.mensagem = controle.mensagem;
         return "/Paginas/RespostaCadastro.xhtml";
     }
@@ -283,11 +313,11 @@ public class bgrCadastro {
         this.ano = ano;
     }
 
-    public BigDecimal getPreco() {
+    public String getPreco() {
         return preco;
     }
 
-    public void setPreco(BigDecimal preco) {
+    public void setPreco(String preco) {
         this.preco = preco;
     }
 
@@ -298,6 +328,7 @@ public class bgrCadastro {
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
     }
+    
 Don't worry, a lot of it is automatic. I tell you how to do this, but first, you have to consider some things:
 1. You have to add @Named(value = "bgrCadastro"
 2. To be able to call any method from the web page, the method **must** start with lower case
@@ -322,3 +353,4 @@ A quick summary for the pages:
 4. You can create a CSS file to make it look better.
 
 That is all for the ALPOO's EXAM. **Good luck!**
+
