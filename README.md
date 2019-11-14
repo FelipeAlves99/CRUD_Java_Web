@@ -51,9 +51,8 @@ If you are doing this in your PC, probably the SQL Server Management Studio is n
  - Reset the SQL Serve Express Services. Open the windows services and find it
 
 3. Finally the script!
-For this example, we will make a CRUD of a car. So create a new SQL query and put this script:
 
-    
+For this example, we will make a CRUD of a car. So create a new SQL query and put this script
 
     create database ALPOO
     go
@@ -63,11 +62,11 @@ For this example, we will make a CRUD of a car. So create a new SQL query and pu
     
     create table Carros
     (
-    id int identity (1,1)
-    fabricante varchar (50),
-    modelo varchar (50),
-    ano varchar (4),
-    valor money
+	    id int identity (1,1),
+	    fabricante varchar (50),
+	    modelo varchar (50),
+	    ano varchar (4),
+	    valor money
     )
     go
 
@@ -131,11 +130,12 @@ BUT **now we can code!**
 Let's make the **CarroDAO** class
 
  1. It's a simple java class here, so just add one.
- 2. Insert this code inside of the class { }
+ 
+Insert this code inside of the class { }
 
-   public String mensagem;
+    public String mensagem;
     Conexao conexao = new Conexao();
-    Session session = Conexao.getSessionFactory().openSession(); `
+    Session session = Conexao.getSessionFactory().openSession(); 
 
     public void CadastrarCarro(Carros carro) {
 
@@ -177,11 +177,12 @@ This package is were all your logic belongs, here we validate, build and control
 
 Let's make the **Validacao** class. 
 1. Create a new java class for it.
-2. Put this code inside. 
 
- public String mensagem;
- public int id;
-    public BigDecimal valor;
+Put this code inside. 
+
+     public String mensagem;
+     public int id;
+     public BigDecimal valor;
 
     public void ValidaCarro(List<String> dadosCarro) {
         this.mensagem = "";
@@ -218,34 +219,35 @@ Put as many validations as you pleased
 
 Let's make the **Controle** class
 1. Create a new java class
-2. Put this code:
 
-`public String mensagem;`    
+Put this code:
+
+    public String mensagem;   
     
-	    public void CadastrarCarro(List<String> dadosCarro){       
-	        this.mensagem = "";
-	        
-	        Carros carro = new Carros();
-	        Validacao validacao = new Validacao();
-	        
-	        validacao.ValidaCarro(dadosCarro);
-	        validacao.ValidarValor(dadosCarro.get(3));
-	        
-	        if(validacao.mensagem.equals("")){
-	            
-	            carro.setId(0);
-	            carro.setFabricante(dadosCarro.get(0));
-	            carro.setModelo(dadosCarro.get(1));
-	            carro.setAno(dadosCarro.get(2));
-	            carro.setValor(validacao.valor);
-	            
-	            CarroDAO carroDAO = new CarroDAO();
-	            carroDAO.CadastrarCarro(carro);
-	            this.mensagem = carroDAO.mensagem;
-	        }
-	        else
-	            this.mensagem = validacao.mensagem;
+    public void CadastrarCarro(List<String> dadosCarro){       
+        this.mensagem = "";
+        
+        Carros carro = new Carros();
+        Validacao validacao = new Validacao();
+        
+        validacao.ValidaCarro(dadosCarro);
+        validacao.ValidarValor(dadosCarro.get(3));
+        
+        if(validacao.mensagem.equals("")){
+            
+            carro.setId(0);
+            carro.setFabricante(dadosCarro.get(0));
+            carro.setModelo(dadosCarro.get(1));
+            carro.setAno(dadosCarro.get(2));
+            carro.setValor(validacao.valor);
+            
+            CarroDAO carroDAO = new CarroDAO();
+            carroDAO.CadastrarCarro(carro);
+            this.mensagem = carroDAO.mensagem;
         }
+        else
+            this.mensagem = validacao.mensagem;
+       }
     
     
 As you can see, it is quite simple. First you validate your data and call the DAO method. 
@@ -260,75 +262,76 @@ The managedBeans is where you connect the front with the back, it's the bridge b
 1. Create the package **"ManagedBeans"**
 2. Create a new class for it. *Add > Others > JavaServer Faces > Managed Bean JSF* 
 3. Call it **bgrCadastro**
-4. Inside of it you put this ~~very small~~ code.
 
-@Named(value = "bgrCadastro")
-@ManagedBean
-@RequestScoped
-public class bgrCadastro {
+Inside of it you put this ~~very small~~ code.
 
-    private String fabricante;
-    private String modelo;
-    private String ano;
-    private String preco;
-    private String mensagem;
-    
-    public bgrCadastro() { }
-    
-    public String cadastrarCarro(){
-        Controle controle = new Controle();
-        
-        List<String> dadosCarro = new ArrayList();
-        dadosCarro.add(fabricante);
-        dadosCarro.add(modelo);
-        dadosCarro.add(ano);   
-        dadosCarro.add(preco);
-                
-        controle.CadastrarCarro(dadosCarro);
-        this.mensagem = controle.mensagem;
-        return "/Paginas/RespostaCadastro.xhtml";
+    @Named(value = "bgrCadastro")
+    @ManagedBean
+    @RequestScoped
+    public class bgrCadastro {
+
+	    private String fabricante;
+	    private String modelo;
+	    private String ano;
+	    private String preco;
+	    private String mensagem;
+	    
+	    public bgrCadastro() { }
+	    
+	    public String cadastrarCarro(){
+	        Controle controle = new Controle();
+	        
+	        List<String> dadosCarro = new ArrayList();
+	        dadosCarro.add(fabricante);
+	        dadosCarro.add(modelo);
+	        dadosCarro.add(ano);   
+	        dadosCarro.add(preco);
+	                
+	        controle.CadastrarCarro(dadosCarro);
+	        this.mensagem = controle.mensagem;
+	        return "/Paginas/RespostaCadastro.xhtml";
+	    }
+
+	    public String getFabricante() {
+	        return fabricante;
+	    }
+
+	    public void setFabricante(String fabricante) {
+	        this.fabricante = fabricante;
+	    }
+
+	    public String getModelo() {
+	        return modelo;
+	    }
+
+	    public void setModelo(String modelo) {
+	        this.modelo = modelo;
+	    }
+
+	    public String getAno() {
+	        return ano;
+	    }
+
+	    public void setAno(String ano) {
+	        this.ano = ano;
+	    }
+
+	    public String getPreco() {
+	        return preco;
+	    }
+
+	    public void setPreco(String preco) {
+	        this.preco = preco;
+	    }
+
+	    public String getMensagem() {
+	        return mensagem;
+	    }
+
+	    public void setMensagem(String mensagem) {
+	        this.mensagem = mensagem;
+	    }
     }
-
-    public String getFabricante() {
-        return fabricante;
-    }
-
-    public void setFabricante(String fabricante) {
-        this.fabricante = fabricante;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
-    public String getAno() {
-        return ano;
-    }
-
-    public void setAno(String ano) {
-        this.ano = ano;
-    }
-
-    public String getPreco() {
-        return preco;
-    }
-
-    public void setPreco(String preco) {
-        this.preco = preco;
-    }
-
-    public String getMensagem() {
-        return mensagem;
-    }
-
-    public void setMensagem(String mensagem) {
-        this.mensagem = mensagem;
-    }
-    
 Don't worry, a lot of it is automatic. I tell you how to do this, but first, you have to consider some things:
 1. You have to add @Named(value = "bgrCadastro"
 2. To be able to call any method from the web page, the method **must** start with lower case
