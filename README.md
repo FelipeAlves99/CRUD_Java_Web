@@ -1,6 +1,6 @@
-# Making a simple CRUD with JavaWeb
+# Making a simple CRUD with JavaWeb (Unip EXAM)
 
-In this tutorial, you will find a step-by-step on what you should do to make a simple **CRUD with JavaWeb**. Follow each step and in the end you will probably be ready to Unip's ALPOO Exam.
+In this tutorial, you will find a step-by-step on what you should do to make a simple **CRUD with JavaWeb**. Follow each step and in the end you will probably be ready to Unip's ALPOO Test.
 The source code is open, but everything you need will be in the **README**.
 
 ## Preparing Ambient
@@ -26,7 +26,7 @@ Also need some SQL shenanigans
 
 ## Starting with Java Web
 
-For now, let's forget about coding. I know, the Exam is all about coding as fast as possible, but first, you gonna need to configure some things to your project, else you will fail the Exam and go to **EXAME** and we don't want that. 
+For now, let's forget about coding. I know, the test is all about coding as fast as possible, but first, you gonna need to configure some things to your project, else you will fail the test and go to **EXAME** and we don't want that. 
 
 ### The SQL Script
 
@@ -52,6 +52,8 @@ If you are doing this in your PC, probably the SQL Server Management Studio is n
 3. Finally the script!
 For this example, we will make a CRUD of a car. So create a new SQL query and put this script:
 
+    
+
     create database ALPOO
     go
     
@@ -68,7 +70,7 @@ For this example, we will make a CRUD of a car. So create a new SQL query and pu
     )
     go
 
-That's it for SQL Server. In the Exam, you only need to do the part 3.
+That's it for SQL Server. In the test, you only need to do the part 3.
 
 ### Creating the Netbeans project
 
@@ -94,11 +96,11 @@ Now let's see if the Hibernate managed to find your connection
 
 1. Go back to your project tab (ctrl+1)
 2. Right click **Source Code Packages**
-3. Go to 'others' and find the hibernate dir
+3. Go to 'others' and find the hibernate directory
 4. Select the first one. Click in next and select the connection you had just created 
 5. After clicking in 'finish', open the file and expand the first drop down menu. There should be the connection string configurations there. If it's not there, delete this project and start over the netbeans part (frustrating, I know).
 
-Ok, our Hibernate is good to go let's do the last part of it.
+Ok, our Hibernate is good to go let's do the next step
 
 1. Create the package **Modelo** and inside it, create a new item
 2. Click to add > others > persistence > Database entity class
@@ -109,6 +111,10 @@ Ok, our Hibernate is good to go let's do the last part of it.
 7. Now open again the hibernate config file and go to mapping
 8. There you will add this class you just created, the **Carro**
 
+Now it's the last step for hibernate, finally.
+1. Right click your project/solution (in my case is WebEstudos) name in that left menu
+2. Go to Build > Compilation and uncheck the option **"Activate Annotation Process"**
+
 Now, you should be good to go with the project.
 
 ### Creating the DAL package
@@ -118,7 +124,7 @@ After all that hibernate thing, we can start coding! After one more part... It's
 1. As the title says, create the DAL package.
 2. Let's create the class '*Conexao*'. Same process, Add > others > hibernate > hibernateUtil.java and name it as Conexao.
 
-Congrats! You have probably 2/10 in the Exam. :(
+Congrats! You have probably 2/10 in the test. :(
 BUT **now we can code!** 
 
 Let's make the **CarroDAO** class
@@ -166,7 +172,7 @@ That's it for the DAL package.
 ### Modelo Package classes
 
 If you are following step by step, this package should be created already. So I will not even bother telling you to create one.
-This package is were all your logic belongs, here we validate, build and control were things go and what order they should go. 
+This package is were all your logic belongs, here we validate, build and control were things go and what order they should be done. 
 
 Let's make the **Validacao** class. 
 1. Create a new java class for it.
@@ -218,8 +224,101 @@ After that reality shock, we have ended the **Modelo** package.
 
 ### ManagedBeans package
 
-Some sweet placeholder.
+The managedBeans is where you connect the front with the back, it's the bridge between then. Here is where you call the **Controle** class that calls everything else. So, let's get going.
 
-## Java Web, a bad way to web dev
+1. Create the package **"ManagedBeans"**
+2. Create a new class for it. *Add > Others > JavaServer Faces > Managed Bean JSF* 
+3. Call it **bgrCadastro**
+4. Inside of it you put this ~~very small~~ code.
 
-Ready for it?? Read this second sweet placeholder.
+@Named(value = "bgrCadastro")
+@ManagedBean
+@RequestScoped
+public class bgrCadastro {
+
+    private String fabricante;
+    private String modelo;
+    private String ano;
+    private BigDecimal preco;
+    private String mensagem;
+    
+    public bgrCadastro() {
+        
+    }
+    
+    public String cadastrarCarro(){
+        Controle controle = new Controle();
+        Carros carro = new Carros();
+        carro.setId(0);
+        carro.setFabricante(fabricante);
+        carro.setModelo(modelo);
+        carro.setAno(ano);
+        carro.setValor(preco);        
+        controle.CadastrarCarro(carro);
+        this.mensagem = controle.mensagem;
+        return "/Paginas/RespostaCadastro.xhtml";
+    }
+
+    public String getFabricante() {
+        return fabricante;
+    }
+
+    public void setFabricante(String fabricante) {
+        this.fabricante = fabricante;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public String getAno() {
+        return ano;
+    }
+
+    public void setAno(String ano) {
+        this.ano = ano;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
+    }
+Don't worry, a lot of it is automatic. I tell you how to do this, but first, you have to consider some things:
+1. You have to add @Named(value = "bgrCadastro"
+2. To be able to call any method from the web page, the method **must** start with lower case
+3. You need to create the constructor for it. It's the `public brgCadastro() { }` line.
+
+Now, to write almost everything automatic just follow:
+
+1. Right click inside the class
+2. Go to **insert code > Getter and Setter** and check all the boxes 
+3. Click generate and there is the magic. ~~Quite magical hum?~~ 
+
+## Java Web, a ~~bad~~ way to web dev
+
+Finally we are at the end of the Exam, took a very long time to write all those lines... But here we are, doing a favor for you guys and girls.
+
+Unfortunaly, it is 00:43 AM, and ~~I'm just to tired to try figure out~~ I just can't figure out a way to insert the code here, without breaking this file and the editor. So here, I say: Clone the git repository or just navegate to it and find out what you need to write in the web pages.
+
+A quick summary for the pages:
+1. All the files are JSF Pages
+2. You need to edit the index.xhtml
+3. You need to create the **Paginas** folder and add a few more JSF Pages
+4. You can create a CSS file to make it look better.
+
+That is all for the ALPOO's EXAM. **Good luck!**
