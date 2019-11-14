@@ -5,9 +5,9 @@
  */
 package ManagedBeans;
 
-import Modelo.Carros;
 import Modelo.Controle;
-import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
@@ -24,22 +24,21 @@ public class bgrCadastro {
     private String fabricante;
     private String modelo;
     private String ano;
-    private BigDecimal preco;
+    private String preco;
     private String mensagem;
     
-    public bgrCadastro() {
-        
-    }
+    public bgrCadastro() { }
     
     public String cadastrarCarro(){
         Controle controle = new Controle();
-        Carros carro = new Carros();
-        carro.setId(0);
-        carro.setFabricante(fabricante);
-        carro.setModelo(modelo);
-        carro.setAno(ano);
-        carro.setValor(preco);        
-        controle.CadastrarCarro(carro);
+        
+        List<String> dadosCarro = new ArrayList();
+        dadosCarro.add(fabricante);
+        dadosCarro.add(modelo);
+        dadosCarro.add(ano);   
+        dadosCarro.add(preco);
+                
+        controle.CadastrarCarro(dadosCarro);
         this.mensagem = controle.mensagem;
         return "/Paginas/RespostaCadastro.xhtml";
     }
@@ -68,11 +67,11 @@ public class bgrCadastro {
         this.ano = ano;
     }
 
-    public BigDecimal getPreco() {
+    public String getPreco() {
         return preco;
     }
 
-    public void setPreco(BigDecimal preco) {
+    public void setPreco(String preco) {
         this.preco = preco;
     }
 
@@ -82,7 +81,5 @@ public class bgrCadastro {
 
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
-    }
-    
-    
+    }       
 }
