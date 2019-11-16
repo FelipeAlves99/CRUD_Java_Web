@@ -7,19 +7,19 @@
     </h:head>
     <h:body>
         <h1>
-            Pesquisa, edição e exclusão de Pessoas
+            Pesquisa, edição e exclusão de Carros
         </h1>
         <br></br>
         <br></br>
         <h:form>
             <h:panelGrid columns="2">
-                Digite um nome para pesquisa
-                <h:inputText id="iptNome" 
-                             value="#{bgrPEE.nome}">
+                Digite um fabricante para pesquisa
+                <h:inputText id="iptFabricante" 
+                             value="#{bgrPEE.fabricante}">
                 </h:inputText>
                 <h:commandButton id="btnPesquisar" 
                                  value="Pesquisar" 
-                                 action="#{bgrPEE.pesquisarPorNome()}">
+                                 action="#{bgrPEE.pesquisarFabricante()}">
                 </h:commandButton>
                 <h:outputText id="otpRespostaPEE"
                               value="#{bgrPEE.mensagem}">

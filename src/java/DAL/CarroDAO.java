@@ -6,6 +6,7 @@
 package DAL;
 
 import Modelo.Carros;
+import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -35,7 +36,7 @@ public class CarroDAO {
         }
     }
 
-    public Carros PesquisarCarro(Carros carro) {
+    public Carros PesquisarCarroPorId(Carros carro) {
         this.mensagem = "";
         Query query = session.createQuery("from Carros c where c.id = :id");
         query.setParameter("id", carro.getId());
@@ -73,6 +74,14 @@ public class CarroDAO {
         } catch (HibernateException e) {
             this.mensagem = e.getMessage();
         }
+    }
+    
+    public List<Carros> PesquisarCarrosPorFabricante(Carros carro){
+        this.mensagem = "";
+        Query query 
+                = session.createQuery("from Carros c where c.fabricante like :fabricante");
+        query.setParameter("fabricante", carro.getFabricante() + "%");        
+        return (List<Carros>) query.list();
     }
 
 }

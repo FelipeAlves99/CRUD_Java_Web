@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <center>
+            <h1>Pesquisa por Fabricante</h1>
+            <br></br>
+            <br></br>
+            <br></br>
+        </center>
+        
+    </h:body>
+    <center>
+        <h:dataTable
+        value="#{bgrPEE.listaFabricante}"
+        var="lista"
+        styleClass="tabela"
+        headerClass="tabela-header"
+        rowClasses="tabela-even-row, tabela-odd-row">
+            <h:column> 
+                <f:facet name="header">ID</f:facet> 
+                #{lista.id} 
+            </h:column>
+            <h:column> 
+                <f:facet name="header">FABRICANTE</f:facet> 
+                #{lista.fabricante} 
+            </h:column>
+            <h:column> 
+                <f:facet name="header">MODELO</f:facet> 
+                #{lista.modelo} 
+            </h:column>
+            <h:column> 
+                <f:facet name="header">ANO</f:facet> 
+                #{lista.ano} 
+            </h:column>
+            <h:column>
+                <f:facet name="header">PREÇO</f:facet>
+                #{lista.preco}
+            </h:column>
+        </h:dataTable>
+    </center>
+</html>
+

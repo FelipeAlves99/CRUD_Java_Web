@@ -1,0 +1,27 @@
+
+.tabela
+{
+    border-collapse: collapse;
+}
+
+.tabela-header
+{
+    text-align: center;
+    background: none repeat scroll 0 0 #E5E5E5;
+    border-bottom: 1px solid #BBBBBB;
+    padding: 16px;
+}
+
+.tabela-odd-row
+{
+    text-align: center;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-top: 1px solid #BBBBBB;    
+}
+
+.tabela-even-row
+{
+    text-align: center;
+    background: none repeat scroll 0 0 #F9F9F9;
+    border-top: 1px solid #BBBBBB;
+}
