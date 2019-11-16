@@ -1,4 +1,5 @@
 
+
 # Making a simple CRUD with JavaWeb (Unip EXAM)
 
 In this tutorial, you will find a step-by-step on what you should do to make a simple **CRUD with JavaWeb**. Follow each step and in the end you will probably be ready to Unip's ALPOO Test.
@@ -250,7 +251,7 @@ Put this code:
        }
     
     
-As you can see, it is quite simple. First you validate your data and call the DAO method. 
+As you can see, it is quite simple. First you validate your data, then you create your Carro object and call the DAO method. 
 Just like the DAO part, Here you will need to create a method for each CRUD letter. We already have the C, so sit down, learn how to code and make the RUD methods. It's literally the same code. 
 
 After that reality shock, we have ended the **Modelo** package. 
@@ -343,11 +344,72 @@ Now, to write almost everything automatic just follow:
 2. Go to **insert code > Getter and Setter** and check all the boxes 
 3. Click generate and there is the magic. ~~Quite magical hum?~~ 
 
+Now you can create the **bgrPEE** so go ahead and create one. Then you can add this code in it:
+
+    public String pesquisarFabricante(){
+        Controle controle = new Controle();
+        List<String> dadosCarro = new ArrayList();
+        listaCarros = new ArrayList();
+        dadosCarro.add("0");
+        dadosCarro.add(this.fabricante);
+        dadosCarro.add("");
+        dadosCarro.add("");
+        listaCarros = controle.PesquisarCarroPorFabricante(dadosCarro);
+        
+        this.mensagem = controle.mensagem;
+        if(listaCarros == null){
+            this.mensagem = "Não existe nenhum fabricante com esse nome";
+            return null;
+        }
+        else{
+            if (listaCarros.size() == 1){
+                this.id = listaCarros.get(0).getId().toString();
+                this.fabricante = listaCarros.get(0).getFabricante().toString();
+                this.modelo = listaCarros.get(0).getModelo().toString();
+                this.ano = listaCarros.get(0).getAno().toString();
+                this.preco = listaCarros.get(0).getValor().toString();
+                return null;
+            }
+            else
+                return "/Paginas/RespostaPEE.xhtml";
+        }                
+    }
+
+    public String getFabricante() {
+        return fabricante;
+    }
+
+    public void setFabricante(String fabricante) {
+        this.fabricante = fabricante;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
+    }
+
+    public List<Carros> getListaCarros() {
+        return listaCarros;
+    }
+
+    public void setListaCarros(List<Carros> listaCarros) {
+        this.listaCarros = listaCarros;
+    }
+
+Just a reminder
+
+- Methods here should start with lower case
+- you need to add @Named(value = "bgrPEE") at the beggining
+- The getters and setters are created just for the things you gonna use in the PEE.xhtml.
+
 ## Java Web, a ~~bad~~ way to web dev
 
 Finally we are at the end of the Exam, took a very long time to write all those lines... But here we are, doing a favor for you guys and girls.
 
-Unfortunaly, it is 00:43 AM, and ~~I'm just to tired to try figure out~~ I just can't figure out a way to insert the code here, without breaking this file and the editor. So here, I say: Clone the git repository or just navegate to it and find out what you need to write in the web pages.
+Unfortunaly, it is 00:43 AM, and ~~I'm just too tired to try figure out~~ I just can't figure out a way to insert the code here, without any breaking changes. So here, I say: Clone the git repository or just navegate to it and find out what you need to write in the web pages.
 
 A quick summary for the pages:
 1. All the files are JSF Pages
@@ -355,5 +417,6 @@ A quick summary for the pages:
 3. You need to create the **Paginas** folder and add a few more JSF Pages
 4. You can create a CSS file to make it look better.
 
+If you have any question about the code, you can contact me. I will happily explain to you the source code.
 That is all for the ALPOO's EXAM. **Good luck!**
 
