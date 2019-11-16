@@ -6,17 +6,17 @@
     <h:head>
         <title>Facelet Title</title>
     </h:head>
-    <center>
+    <h:body>
+        <center>
             <h1>Pesquisa por Fabricante</h1>
             <br></br>
             <br></br>
             <br></br>
-        </center>
-        
+        </center>        
     </h:body>
     <center>
         <h:dataTable
-        value="#{bgrPEE.listaFabricante}"
+            value="#{bgrPEE.listaCarros}"
         var="lista"
         styleClass="tabela"
         headerClass="tabela-header"
@@ -39,7 +39,7 @@
             </h:column>
             <h:column>
                 <f:facet name="header">PREÇO</f:facet>
-                #{lista.preco}
+                #{lista.valor}
             </h:column>
         </h:dataTable>
     </center>
