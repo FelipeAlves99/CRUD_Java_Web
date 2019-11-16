@@ -115,6 +115,7 @@ Ok, our Hibernate is good to go let's do the next step
 Now it's the last step for hibernate, finally.
 1. Right click your project/solution (in my case is WebEstudos) name in that left menu
 2. Go to Build > Compilation and uncheck the option **"Activate Annotation Process"**
+3. Click to build the solution. 
 
 Now, you should be good to go with the project.
 
