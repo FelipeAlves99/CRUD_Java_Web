@@ -14,7 +14,7 @@ First of all, you gonna need Netbeans and JDK installed in your machine. Links f
 
 **[JDK Download](https://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html)**
 
- - Get the version that matches your computer config. I mean windows x64 ou x86, Linux or MacOS. 
+ - Get the version that matches your computer config. I mean windows x64 or x86, Linux or MacOS. 
 
 Also need some SQL shenanigans
 
