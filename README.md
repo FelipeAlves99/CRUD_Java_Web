@@ -63,7 +63,7 @@ For this example, we will make a CRUD of a car. So create a new SQL query and pu
     
     create table Carros
     (
-	    id int identity (1,1),
+	    id int primary key identity (1,1),
 	    fabricante varchar (50),
 	    modelo varchar (50),
 	    ano varchar (4),
