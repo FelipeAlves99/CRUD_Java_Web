@@ -335,7 +335,7 @@ Inside of it you put this ~~very small~~ code.
 	    }
     }
 Don't worry, a lot of it is automatic. I tell you how to do this, but first, you have to consider some things:
-1. You have to add @Named(value = "bgrCadastro"
+1. You have to add @Named(value = "bgrCadastro")
 2. To be able to call any method from the web page, the method **must** start with lower case
 3. You need to create the constructor for it. It's the `public brgCadastro() { }` line.
 
