@@ -107,10 +107,11 @@ Ok, our Hibernate is good to go let's do the next step
 2. Click to add > others > persistence > Database entity class
 3. Select your connection string and add your **Carros** table
 4. Click next and change the class name to **Carro**
-5. Click next one more time and in the collection type, select *java.util.list*
-6. Finish
-7. Now open again the hibernate config file and go to mapping
-8. There you will add this class you just created, the **Carro**
+5. Add this line of code inside the model file, right below the `@Column(name = "id")`: `@GeneratedValue`
+6. Click next one more time and in the collection type, select *java.util.list*
+7. Finish
+8. Now open again the hibernate config file and go to mapping
+9. There you will add this class you just created, the **Carro**
 
 Now it's the last step for hibernate, finally.
 1. Right click your project/solution (in my case is WebEstudos) name in that left menu
